@@ -8,7 +8,7 @@
         Simple Todo Application with Livewire
     </div>
 
-    <div class="w-full max-w-3xl shadow-lg rounded-lg p-6 bg-white">
+    <div class="w-full max-w-3xl shadow-lg rounded-lg p-6 bg-white mt-[90px]" style="margin-top:90px;">
         <!-- header -->
         <div>
             @include('inc.form')

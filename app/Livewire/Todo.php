@@ -121,8 +121,14 @@ class Todo extends Component
     }
 
     public function setEditng($id, $name){
-        $this->isEdit = $id;
-        $this->editTodo = $name;
+        if($this->isEdit && $this->isEdit == $id){
+            $this->updateTodo();
+            $this->reset('isEdit', 'editTodo');
+        }else{
+            $this->isEdit = $id;
+            $this->editTodo = $name;
+        }
+
     }
 
     public function updateTodo(){
