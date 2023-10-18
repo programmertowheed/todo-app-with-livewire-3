@@ -148,7 +148,14 @@ class Todo extends Component
 
         try{
             $this->resetValidation();
-            TodoModel::where('id', $this->isEdit)->update(['name' => $this->editTodo]);
+            $todo = TodoModel::where('id', $this->isEdit)->first();
+
+            if($todo->name != $this->editTodo){
+                $todo->completed = 0;
+            }
+            $todo->name = $this->editTodo;
+            $todo->save();
+
             $this->reset('editTodo', 'isEdit');
             Toaster::success('Todo updated successfully.');
         } catch (\Exception $e){
