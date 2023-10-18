@@ -17,6 +17,7 @@ class Todo extends Component
     public $name="";
     public $editTodo="";
 
+    // Toggle todo complete status
     public function toggoleComplete($id){
         try{
             $todo = TodoModel::where('id', $id)->first();
@@ -29,6 +30,7 @@ class Todo extends Component
         }
     }
 
+    // Complete all todos
     public function completeAll(){
         try{
             $todos = TodoModel::where('completed', 0)->get();
@@ -42,6 +44,7 @@ class Todo extends Component
         }
     }
 
+    // Incomplete all todos
     public function inCompleteAll(){
         try{
             $todos = TodoModel::where('completed', 1)->get();
@@ -55,6 +58,7 @@ class Todo extends Component
         }
     }
 
+    // clear all complete todos
     public function clearAllCompleted(){
         try{
             $todos = TodoModel::where('completed', 1)->get();
@@ -67,6 +71,7 @@ class Todo extends Component
         }
     }
 
+    // Add color in filter toggle action
     public function toggleColorFilter($value){
         if($this->filterColor == $value){
             $this->filterColor = '';
@@ -75,6 +80,7 @@ class Todo extends Component
         }
     }
 
+    // Add color in filter
     public function updateColor($id, $color){
         try{
             $todo = TodoModel::where('id', $id)->first();
@@ -86,6 +92,7 @@ class Todo extends Component
         }
     }
 
+    // Delete todo
     public function delete($id){
         try{
             TodoModel::where('id', $id)->delete();
@@ -95,6 +102,7 @@ class Todo extends Component
         }
     }
 
+    // Save todo in database
     public function save(){
         $validated = Validator::make(
             // Data to validate...
@@ -120,6 +128,7 @@ class Todo extends Component
         }
     }
 
+    // Set which todo editing
     public function setEditng($id, $name){
         if($this->isEdit && $this->isEdit == $id){
             $this->updateTodo();
@@ -131,6 +140,7 @@ class Todo extends Component
 
     }
 
+    // Todo update in database
     public function updateTodo(){
         $validated = Validator::make(
             // Data to validate...
@@ -163,8 +173,8 @@ class Todo extends Component
         }
     }
 
-    public function render()
-    {
+    // Todo view render
+    public function render(){
         $todos = TodoModel::latest()->get();
         $this->filterType == "all" ?: $todos = $todos->where('completed', $this->filterType);
         $this->filterColor === '' ?: $todos = $todos->where('color', $this->filterColor);
